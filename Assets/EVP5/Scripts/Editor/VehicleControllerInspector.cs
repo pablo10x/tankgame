@@ -7,6 +7,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if !UNITY_ANDROID
 namespace EVP
 {
 
@@ -277,3 +278,4 @@ public class VehicleControllerInspector : Editor
 	    }
 	}
 }
+#endif

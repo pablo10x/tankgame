@@ -25,11 +25,12 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _KEYWORD0_ON
+  - _TEAMCOLORSTRIPE_ON
   - _TOGGLESWITCH0_ON
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1985
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -65,17 +66,19 @@ Material:
     - _EnvironmentReflections: 1
     - _Keyword0: 1
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: -15
     - _ReceiveShadows: 1
     - _SpecularHighlights: 1
+    - _TeamColorStripe: 1
     - _ToggleSwitch0: 1
+    - _UseStripe: 0
     - _switch: 0
     m_Colors:
     - _Color0: {r: 0.88431245, g: 1, b: 0.21226418, a: 1}
     - _Color1: {r: 0.24154504, g: 0.8163405, b: 0.8679245, a: 0}
     - _Color11: {r: 0, g: 0.9179602, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _basecolor: {r: 0.11792449, g: 0.67031145, b: 1, a: 1}
+    - _basecolor: {r: 0, g: 0.90434813, b: 1, a: 1}
     - _teamcolor: {r: 1, g: 1, b: 1, a: 0}
     - _teamcolor_1: {r: 0.028301895, g: 0.028301895, b: 0.028301895, a: 0}
   m_BuildTextureStacks: []

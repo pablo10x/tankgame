@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
+
+
+
 using UnityEditor;
 
+#if !UNITY_ANDROID
 
 namespace EVP
 {
@@ -85,3 +89,4 @@ public static class InspectorTools
 		}
 	}
 }
+#endif

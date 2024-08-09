@@ -3,23 +3,24 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Humvee : Unit, IDamageable, IDeathHandler, IAttackable, ISelectable {
-    [SerializeField] private AiVehicleController _AivehicleController;
-    [SerializeField] private VehicleController   vehicleController;
+public class Humvee : Unit, IDamageable, IDeathHandler, IAttackable {
+    [SerializeField] private AiVehicleController AiVehicle;
+    [SerializeField] private VehicleController vehicleController;
+
+    public Humvee(float attackCooldown) {
+        AttackCooldown = attackCooldown;
+    }
 
 
-    void Start()
-    {
+    void Start() {
         setUpUnit();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
     }
 
-    public override void TakeDamage(int amount)
-    {
+    public override void TakeDamage(int amount) {
         if (amount >= Health) {
             Health = 0;
             OnDeath();
@@ -29,32 +30,32 @@ public class Humvee : Unit, IDamageable, IDeathHandler, IAttackable, ISelectable
         Debug.Log($"Taking damage::{amount} New unit health {Health}");
     }
 
-    public override void Heal(int amount)
-    {
+    public override void Heal(int amount) {
     }
 
-    public override bool IsAlive()
-    {
-        if (Health > 0) return true;
+    public override bool IsAlive() {
+        if (Health > 0)
+            return true;
         return false;
     }
 
-    public override void Attack(IDamageable target)
-    {
+
+    public override void Attack(IDamageable target) {
+        if (target.IsAlive()) {
+        }
     }
 
     public float AttackCooldown { get; }
 
-    public override void OnDeath()
-    {
+    public override void OnDeath() {
         EffectManager.Instance.Explode(vehicleController.cachedRigidbody);
     }
 
-    public void OnSelect()
-    {
+    public override void Move(Vector3 position) {
+        if (IsAlive()) {
+            AiVehicle.tryDriveTo(position);
+        }
     }
 
-    public void OnDeselect()
-    {
-    }
+   
 }

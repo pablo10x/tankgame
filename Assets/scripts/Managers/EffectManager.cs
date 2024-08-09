@@ -6,8 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class EffectManager : Singleton<EffectManager>
-{
+public class EffectManager:Singleton<EffectManager> {
     [FoldoutGroup("Vehicle Explosion")] public float     idleExplosionForce   = 1500f;
     [FoldoutGroup("Vehicle Explosion")] public float     movingExplosionForce = 1200f;
     [FoldoutGroup("Vehicle Explosion")] public float     explosionRadius      = 50f;
@@ -15,10 +14,9 @@ public class EffectManager : Singleton<EffectManager>
     [FoldoutGroup("Vehicle Explosion")] public float     forwardDirection  = 5f;
 
 
-    [BoxGroup("Testing")] public Unit Veh;
+   [BoxGroup("Testing")] public Unit Veh;
 
-    public void Explode(Rigidbody targetRigidbody)
-    {
+    public void Explode (Rigidbody targetRigidbody) {
         // Determine if the target is moving
         bool isMoving = targetRigidbody.velocity.magnitude > 0.1f; // Adjust threshold as needed
 
@@ -41,13 +39,12 @@ public class EffectManager : Singleton<EffectManager>
     }
 
 
-    public void GiveUnitDamage(Unit _unit, int damage) => _unit.TakeDamage(damage);
+    public void GiveUnitDamage (Unit _unit, int damage) => _unit.TakeDamage(damage);
 
 
-    private void Update()
-    {
+    private void Update () {
         if (Input.GetKeyDown(KeyCode.Space)) {
-           Veh.OnDeath();
+            Veh.OnDeath();
         }
     }
 }

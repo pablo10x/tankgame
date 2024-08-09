@@ -5,6 +5,8 @@
 //------------------------------------------------------------------------------------------------
 
 using UnityEngine;
+#if !UNITY_ANDROID 
+
 using UnityEditor;
 
 namespace EVP
@@ -49,3 +51,4 @@ public class VehicleStandardInputInspector : Editor
 
 	}
 }
+#endif
