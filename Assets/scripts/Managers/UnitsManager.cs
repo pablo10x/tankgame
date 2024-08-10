@@ -7,7 +7,7 @@ public class UnitsManager : MonoBehaviour {
 
     public List<Unit> SelectedUnits = new List<Unit>();
 
-
+    private static readonly RaycastHit[] s_Hits = new RaycastHit[1];
     public Camera MainCam;
 
     void Start() {
@@ -17,7 +17,7 @@ public class UnitsManager : MonoBehaviour {
     void Update() {
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0) {
             Ray ray = new Ray();
-            if (MainCam!= null) {
+            if (MainCam != null) {
                 #if UNITY_ANDROID && !UNITY_EDITOR
                 ray = MainCam.ScreenPointToRay(Input.GetTouch(0).position);
                 #else
@@ -25,38 +25,51 @@ public class UnitsManager : MonoBehaviour {
                 #endif
             }
 
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                //check if clicked on unit
-                Unit clickedUnit = hit.collider.GetComponentInParent<Unit>();
+            // Perform non-allocating raycast
+            if (Physics.RaycastNonAlloc(ray, s_Hits, Mathf.Infinity, LayerMask.GetMask("AI_VEHICLE")) > 0) {
+                RaycastHit hit = s_Hits[0]; // Get the first hit
 
+                // Check if clicked on a unit
+                Unit clickedUnit = hit.collider.GetComponentInParent<Unit>();
                 if (clickedUnit != null) {
-                    //if not selected select it
+                    // Toggle unit selection
                     if (SelectedUnits.Contains(clickedUnit)) {
-                        clickedUnit.isSelected = false;
-                        SelectedUnits.Remove(clickedUnit);
-                        clickedUnit.OnDeselect();
+                        DeselectUnit(clickedUnit);
                     }
                     else {
-                        clickedUnit.isSelected = true;
-                        SelectedUnits.Add(clickedUnit);
-                        clickedUnit.OnSelect();
+                        SelectUnit(clickedUnit);
                     }
                 }
-                else {
-                    // a location
-                    foreach (var unit in SelectedUnits) {
-                        if (unit.UnitType == UnitType.Vehicle) {
-                            if (!unit.GetComponent<AiVehicleController>().tryDriveTo(hit.point)) {
-                                Debug.Log("Can't move there , invalid location");
-                            }
-                        }
-                    }
+            }
+
+            if (Physics.RaycastNonAlloc(ray, s_Hits, Mathf.Infinity, LayerMask.GetMask("Ground")) > 0) {
+                RaycastHit hit = s_Hits[0]; // Get the first hit
+                // Handle click on location
+                HandleLocationClick(hit.point);
+            }
+        }
+    }
+
+    private void SelectUnit(Unit unit) {
+        unit.isSelected = true;
+        SelectedUnits.Add(unit);
+        unit.OnSelect();
+    }
+
+    private void DeselectUnit(Unit unit) {
+        unit.isSelected = false;
+        SelectedUnits.Remove(unit);
+        unit.OnDeselect();
+    }
+
+    private void HandleLocationClick(Vector3 location) {
+        int selectedUnitCount = SelectedUnits.Count;
+        foreach (Unit unit in SelectedUnits) {
+            if (unit.UnitType == UnitType.Vehicle) {
+                AiVehicleController vehicleController = unit.GetComponent<AiVehicleController>();
+                if (vehicleController != null && !vehicleController.tryDriveTo(location, selectedUnitCount + 1f)) {
+                    Debug.Log("Can't move there, invalid location");
                 }
-
-
-                //       PositionToGo.position = hit.point;
-                //       DriveTo(PositionToGo.position);
             }
         }
     }

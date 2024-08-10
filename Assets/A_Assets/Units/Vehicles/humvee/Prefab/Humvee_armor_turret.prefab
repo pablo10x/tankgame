@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62725901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: -0, y: -0.6, z: -0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,16 +44,16 @@ NavMeshAgent:
   m_Radius: 3
   m_Speed: 1
   m_Acceleration: 100000
-  avoidancePriority: 99
+  avoidancePriority: 0
   m_AngularSpeed: 100000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.94
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &2234390649767892308
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,8 +485,7 @@ GameObject:
   - component: {fileID: 6648369523928874267}
   - component: {fileID: 6648369523928874264}
   - component: {fileID: 3371105083685340515}
-  - component: {fileID: 7184080080708803776}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Humvee_armor_turret
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -639,12 +638,12 @@ MonoBehaviour:
   centerOfMassPosition: 0.5
   centerOfMassHeightOffset: 0
   centerOfMassTransform: {fileID: 0}
-  maxSpeedForward: 50
+  maxSpeedForward: 10
   maxSpeedReverse: 5
   tireFriction: 3
-  rollingResistance: 0.481
-  antiRoll: 0.903
-  maxSteerAngle: 46.4
+  rollingResistance: 1
+  antiRoll: 1
+  maxSteerAngle: 62.6
   aeroDrag: 0
   aeroDownforce: 1
   driveBalance: 0.5
@@ -652,17 +651,17 @@ MonoBehaviour:
   tireFrictionBalance: 0.505
   aeroBalance: 0.5
   handlingBias: 0.5
-  maxDriveForce: 1500
+  maxDriveForce: 2500
   forceCurveShape: 0.652
   maxDriveSlip: 0.5
   driveForceToMaxSlip: 800
-  maxBrakeForce: 957.33
-  brakeForceToMaxSlip: 800
+  maxBrakeForce: 2500
+  brakeForceToMaxSlip: 153.19
   brakeMode: 1
-  maxBrakeSlip: 0.9
+  maxBrakeSlip: 0
   maxBrakeRatio: 0.538
-  handbrakeMode: 0
-  maxHandbrakeSlip: 5
+  handbrakeMode: 1
+  maxHandbrakeSlip: 0
   maxHandbrakeRatio: 1
   tractionControl: 0
   tractionControlRatio: 1
@@ -672,8 +671,8 @@ MonoBehaviour:
   steeringLimitRatio: 0.5
   steeringAssist: 1
   steeringAssistRatio: 0.5
-  steerInput: 0
-  throttleInput: -1
+  steerInput: 0.0015329272
+  throttleInput: 0.5
   brakeInput: 0
   handbrakeInput: 0
   wheelUpdateRate: 1
@@ -699,6 +698,7 @@ MonoBehaviour:
   navigator: {fileID: 62725903}
   _vehicleController: {fileID: 6648369523928874267}
   PositionToGo: {fileID: 0}
+  finalDestinationTolerance: 1.2
 --- !u!114 &3371105083685340515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,27 +711,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17be149bf42d76347a68f306e4d34efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0
   _UnitData: {fileID: 11400000, guid: 6147437cfc3e2ee43ba180c7938c2298, type: 2}
   UnitType: 2
   unitFaction: 0
   AiVehicle: {fileID: 6648369523928874264}
   vehicleController: {fileID: 6648369523928874267}
---- !u!208 &7184080080708803776
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6964759521850779707}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.2290001, y: 0.76900005, z: 2.4}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.064, z: -0.38200003}
-  m_TimeToStationary: 0.5
 --- !u!1 &8253781922215857358
 GameObject:
   m_ObjectHideFlags: 0

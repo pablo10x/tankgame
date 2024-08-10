@@ -64,8 +64,7 @@ public abstract class Unit : MonoBehaviour, ISelectable {
         baseArmor = _UnitData.Armor;
 
         MovementSpeed = _UnitData.MovementSpeed;
-
-        Debug.Log($"Base: {Health}");
+        
     }
 
     public abstract void TakeDamage(int amount);
