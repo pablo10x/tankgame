@@ -13,7 +13,7 @@ public class Humvee : Unit, IDamageable, IDeathHandler, IAttackable {
 
 
     void Start() {
-        setUpUnit();
+        SetUpUnit();
     }
 
     // Update is called once per frame
@@ -49,6 +49,10 @@ public class Humvee : Unit, IDamageable, IDeathHandler, IAttackable {
 
     public override void OnDeath() {
         EffectManager.Instance.Explode(vehicleController.cachedRigidbody);
+    }
+
+    public override void OnStateChanged(unitState oldstate, unitState newstate) {
+       
     }
 
     public override void Move(Vector3 position) {

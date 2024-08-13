@@ -121,7 +121,7 @@ public class VehicleManager : MonoBehaviour
 
 		SetupVehicleComponents(vehicle, false);
 		vehicle.throttleInput = 0.0f;
-		vehicle.brakeInput = 1.0f;
+		vehicle.brakeInput    = 1.0f;
 		}
 
 

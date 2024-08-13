@@ -90,7 +90,8 @@ public class VehicleRandomInput : MonoBehaviour
 		// Apply the input progressively
 
 		m_vehicle.steerInput = Mathf.MoveTowards(m_vehicle.steerInput, m_targetSteer, steerChangeRate * Time.deltaTime);
-		m_vehicle.throttleInput = Mathf.MoveTowards(m_vehicle.throttleInput, m_targetThrottle, throttleChangeRate * Time.deltaTime);
+		m_vehicle.throttleInput
+			= Mathf.MoveTowards(m_vehicle.throttleInput, m_targetThrottle, throttleChangeRate * Time.deltaTime);
 		m_vehicle.brakeInput = m_targetBrake;
 		m_vehicle.handbrakeInput = 0.0f;
 		}

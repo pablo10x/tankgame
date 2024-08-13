@@ -37,6 +37,10 @@ public class Soldier:Unit, IDamageable, IAttackable, IDeathHandler {
 
     }
 
+    public override void OnStateChanged(unitState oldstate, unitState newstate) {
+        
+    }
+
     public override void Move (Vector3 position) {
 
     }
