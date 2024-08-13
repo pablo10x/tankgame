@@ -2,22 +2,26 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public interface IDamageable {
+public interface IDamageable
+{
     void TakeDamage(int amount);
-    void Heal(int       amount);
+    void Heal(int amount);
     bool IsAlive();
 }
 
-public interface IAttackable {
-    void  Attack(IDamageable target);
+public interface IAttackable
+{
+    void Attack(IDamageable target);
     float AttackCooldown { get; }
 }
 
-public interface IDeathHandler {
+public interface IDeathHandler
+{
     void OnDeath();
 }
 
-public interface ISelectable {
+public interface ISelectable
+{
     void OnSelect();
     void OnDeselect();
 }
@@ -25,7 +29,8 @@ public interface ISelectable {
 
 //unit types
 
-public enum UnitType {
+public enum UnitType
+{
     unknown,
     Infantry,
     Vehicle,
@@ -35,18 +40,32 @@ public enum UnitType {
     Hero,
 }
 
-public enum UnitFaction {
+public enum UnitFaction
+{
     USA
 }
 
 
+public enum unitState {
+    Idle,
+    Moving,
+    Guarding,
+    Attacking,
+    Capturing
+}
+
+
+
 [Serializable]
 public abstract class Unit : MonoBehaviour, ISelectable {
+
+    
     protected int MaxHealth;
     protected int Health;
-    protected int baseArmor;
+    protected int BaseArmor;
     protected float MovementSpeed;
 
+    protected unitState CurrentState;
 
     public bool isSelected = false;
 
@@ -56,31 +75,42 @@ public abstract class Unit : MonoBehaviour, ISelectable {
 
     [BoxGroup("Unit Data")] public UnitData _UnitData;
     [BoxGroup("Unit Data")] public UnitType UnitType = UnitType.unknown;
+
+
     [BoxGroup("Unit Data")] public UnitFaction unitFaction;
 
-    public void setUpUnit() {
+    public void SetUpUnit()
+    {
         MaxHealth = _UnitData.MaxHealth;
-        Health    = _UnitData.Health;
-        baseArmor = _UnitData.Armor;
-
+        Health = _UnitData.Health;
+        BaseArmor = _UnitData.Armor;
         MovementSpeed = _UnitData.MovementSpeed;
-        
     }
 
     public abstract void TakeDamage(int amount);
-    public abstract void Heal(int       amount);
+    public abstract void Heal(int amount);
     public abstract bool IsAlive();
     public abstract void Attack(IDamageable target);
     public abstract void OnDeath();
 
+    public abstract void OnStateChanged(unitState oldstate, unitState newstate);
+    
+    
+    
     public abstract void Move(Vector3 position);
 
 
-    public void OnSelect() {
-        Debug.Log($"{this.name} im selected");
+    public void SetState(unitState state) {
+        OnStateChanged(CurrentState,state);
     }
- 
-    public void OnDeselect() {
+    
+    public void OnSelect()
+    {
+//        Debug.Log($"{this.name} im selected");
+    }
+
+    public void OnDeselect()
+    {
         Debug.Log($"{this.name} im DESELECTED");
     }
 }
