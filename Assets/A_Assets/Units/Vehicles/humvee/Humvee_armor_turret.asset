@@ -15,4 +15,15 @@ MonoBehaviour:
   MaxHealth: 500
   Health: 500
   Armor: 100
-  MovementSpeed: 6
+  MovementSpeed: 15.01
+  unitMaxRotationAngle: 141.3
+  UnitType: 2
+  unitFaction: 0
+  IsStationary: 0
+  stoppingDistance: 0.1
+  avoidanceRadius: 0.01
+  avoidanceForce: 10.6
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rotationSpeed: 5.23
